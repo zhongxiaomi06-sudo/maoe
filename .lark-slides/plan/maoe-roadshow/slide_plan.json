@@ -1,0 +1,82 @@
+{
+  "deck": {
+    "title": "MAOE 路演 PPT",
+    "topic": "Skill 原生工作流编译与 Pareto 调度引擎",
+    "audience": "海聚英才 OPC 极客组评委",
+    "tone": "高级科技感、简洁、深色基调",
+    "color_system": {
+      "background": "深蓝渐变 #080C1C → #121C38",
+      "primary": "青色 #58C6FF（数据/箭头/分隔）",
+      "accent": "金色 #FFB84D（关键数字/标题强调）",
+      "text": "近白 #EBF0FA / 灰蓝 #A0B4D2"
+    },
+    "motif": "左侧粗色块 + 大号数字 + 极简网格",
+    "pages": 8
+  },
+  "slides": [
+    {
+      "index": 1,
+      "label": "封面",
+      "layout_type": "hero",
+      "visual_focus": "大标题 + 副标题 + 参赛章",
+      "text_density": "low",
+      "key_message": "MAOE — 让 Agent 工作流像编译器一样可推理、可预算、可追溯"
+    },
+    {
+      "index": 2,
+      "label": "问题",
+      "layout_type": "two-column",
+      "visual_focus": "左图标列 + 右文字结论",
+      "text_density": "medium",
+      "key_message": "Agent 编排现状有三个痛点：拍脑袋编排 / 成本不可预算 / 决策不可追溯"
+    },
+    {
+      "index": 3,
+      "label": "方案",
+      "layout_type": "central-flow",
+      "visual_focus": "GoalIR→DAG→三档候选 流程图",
+      "text_density": "medium",
+      "key_message": "把 Skill 变成带类型契约的胶囊，编译期算清 cost/risk/quality，再用三档候选 Pareto 选最优"
+    },
+    {
+      "index": 4,
+      "label": "架构",
+      "layout_type": "system-diagram",
+      "visual_focus": "CLI→Engine→6 子系统→LLM；旁路 Compiler/Registry/Runtime/Bootstrap",
+      "text_density": "low",
+      "key_message": "运行管线 + 编译管线两条平行链路，模块边界清晰"
+    },
+    {
+      "index": 5,
+      "label": "关键创新",
+      "layout_type": "2x2-grid",
+      "visual_focus": "四张卡片：Skill 契约 / 三档 Pareto / lockfile 可复现 / redaction 安全",
+      "text_density": "medium",
+      "key_message": "我们的差异点不是模型多，而是把决策过程做成了可审计的代码"
+    },
+    {
+      "index": 6,
+      "label": "工程指标",
+      "layout_type": "metric-row",
+      "visual_focus": "6 个大号数字卡片",
+      "text_density": "low",
+      "key_message": "48 tests / 100% ruff clean / 10 Skill / 8 Agent / 3 档候选 / 5 类静态校验"
+    },
+    {
+      "index": 7,
+      "label": "演示与部署",
+      "layout_type": "two-column",
+      "visual_focus": "左：CLI 命令；右：GitHub 链接二维码占位",
+      "text_density": "medium",
+      "key_message": "已开源到 github.com/zhongxiaomi06-sudo/maoe，uv sync 即可跑"
+    },
+    {
+      "index": 8,
+      "label": "结尾",
+      "layout_type": "closing",
+      "visual_focus": "大标题 + 队伍信息",
+      "text_density": "low",
+      "key_message": "MAOE：让 Agent 工程像编译器一样长大"
+    }
+  ]
+}
