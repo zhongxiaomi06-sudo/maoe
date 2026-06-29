@@ -1,229 +1,172 @@
 export default function Poster() {
   return (
-    <div className="w-[3839px] h-[6496px] bg-gradient-to-br from-[#0a0f1e] via-[#0f1729] to-[#1a1f3a] text-white font-sans flex flex-col relative overflow-hidden">
-      
-      {/* ===== 顶部铭牌 ===== */}
-      <div className="flex items-center justify-between px-[120px] py-[60px] bg-[#060a16]/95 border-b-[4px] border-[#3b82f6]/60">
-        <div className="flex items-center gap-[40px]">
-          <div className="w-[10px] h-[120px] bg-[#3b82f6] rounded-full"></div>
-          <div>
-            <div className="text-[38px] text-[#64748b] tracking-[8px] uppercase">Team 队名</div>
-            <div className="text-[72px] font-black tracking-[4px] mt-[8px]">Workflow</div>
-          </div>
-        </div>
-        <div className="flex items-center gap-[40px]">
-          <div>
-            <div className="text-[38px] text-[#64748b] tracking-[8px] uppercase text-right">Project 作品</div>
-            <div className="text-[80px] font-black tracking-[6px] mt-[8px] text-right">
-              <span className="text-[#f59e0b]">M</span>
-              <span className="text-[#f59e0b]">A</span>
-              <span className="text-[#f59e0b]">O</span>
-              <span className="text-white/80">E</span>
+    <div
+      className="relative w-[3839px] overflow-hidden"
+      style={{
+        background: "radial-gradient(1600px 1000px at 20% -5%, rgba(56,189,248,0.18), transparent 55%), radial-gradient(1400px 900px at 80% 40%, rgba(168,85,247,0.15), transparent 55%), radial-gradient(1200px 800px at 50% 95%, rgba(250,204,21,0.10), transparent 55%), #060910",
+        fontFamily: "'Inter', system-ui, sans-serif",
+        height: 6496,
+      }}
+    >
+      {/* Subtle grid */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.04]" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <pattern id="g" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="none" stroke="white" strokeWidth="0.3"/></pattern>
+        <rect width="100" height="100" fill="url(#g)"/>
+      </svg>
+
+      {/* ─── TOP BADGE ─── */}
+      <div className="absolute top-0 left-0 right-0 h-[340px] bg-gradient-to-b from-[#0b1120] via-[#0b1120]/95 to-transparent z-10">
+        <div className="flex items-center justify-between px-[180px] pt-[80px]">
+          <div className="flex items-center gap-[36px]">
+            <div className="w-[8px] h-[100px] rounded bg-[#38bdf8]"></div>
+            <div>
+              <div className="text-[36px] text-[#475569] tracking-[0.3em] uppercase">Team</div>
+              <div className="text-[80px] font-black tracking-[0.05em] text-white leading-tight">Workflow</div>
             </div>
           </div>
-          <div className="w-[10px] h-[120px] bg-[#f59e0b] rounded-full"></div>
+          <div className="flex items-center gap-[36px]">
+            <div>
+              <div className="text-[36px] text-[#475569] tracking-[0.3em] uppercase text-right">Project</div>
+              <div className="text-[80px] font-black tracking-[0.05em] leading-tight text-right" style={{ background: "linear-gradient(135deg, #facc15 0%, #f97316 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>MAOE</div>
+            </div>
+            <div className="w-[8px] h-[100px] rounded bg-[#facc15]"></div>
+          </div>
         </div>
       </div>
 
-      {/* ===== Hero 标题区 ===== */}
-      <div className="px-[160px] pt-[100px] pb-[60px] relative">
-        <div className="absolute left-[160px] top-[60px] w-[180px] h-[6px] bg-[#3b82f6] rounded"></div>
-        <h1 className="text-[200px] font-black leading-none tracking-[-4px] mt-[60px]">
-          MAOE
-        </h1>
-        <div className="flex items-center gap-[24px] mt-[20px]">
-          <div className="w-[80px] h-[4px] bg-[#3b82f6] rounded"></div>
-          <p className="text-[52px] text-[#94a3b8] tracking-[3px]">
-            Multi-Agent Dynamic Orchestration Engine
-          </p>
-        </div>
-        <p className="text-[38px] text-[#64748b] mt-[20px] tracking-[2px]">
-          Skill 原生工作流编译 · 三档候选 Pareto 调度 · 决策可追溯
-        </p>
-        <div className="inline-block mt-[40px] px-[48px] py-[24px] bg-[#f59e0b]/10 border border-[#f59e0b]/40 rounded-[16px]">
-          <span className="text-[42px] text-[#f59e0b] font-semibold tracking-[4px]">
-            海聚英才 OPC 专项赛 · 极客组
-          </span>
-        </div>
-      </div>
+      {/* ─── HERO ─── */}
+      <div className="relative z-10 pt-[380px] flex flex-col items-center text-center">
+        <div className="text-[28px] font-bold uppercase tracking-[0.6em] text-[#38bdf8]/70 mb-[60px]">海聚英才 OPC 专项赛 · 极客组</div>
 
-      {/* 分割线 */}
-      <div className="mx-[160px] h-[2px] bg-gradient-to-r from-[#3b82f6]/80 via-[#f59e0b]/40 to-transparent"></div>
-
-      {/* ===== 三栏布局 ===== */}
-      <div className="flex gap-[60px] px-[120px] pt-[80px] flex-1">
-        
-        {/* 左栏：问题 + 方案 */}
-        <div className="w-[1100px] flex flex-col gap-[60px]">
-          
-          {/* 问题 */}
-          <div className="bg-[#0f1729]/80 rounded-[32px] border border-[#1e293b] p-[60px]">
-            <div className="flex items-center gap-[20px] mb-[40px]">
-              <div className="w-[64px] h-[64px] rounded-[16px] bg-[#ef4444]/20 flex items-center justify-center">
-                <span className="text-[36px]">⚡</span>
-              </div>
-              <h2 className="text-[60px] font-bold tracking-[2px]">核心痛点</h2>
-            </div>
-            <div className="flex flex-col gap-[32px]">
-              {[
-                { num: "01", title: "拍脑袋编排", desc: "工作流靠人工试错，说不清为什么选这个 Skill" },
-                { num: "02", title: "成本不可预算", desc: "跑起来才知道烧多少 token，硬编码限流不可靠" },
-                { num: "03", title: "决策不可追溯", desc: "没有审计日志，无法回放，出问题只能重跑" },
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-[24px]">
-                  <div className="w-[64px] h-[64px] rounded-[16px] bg-[#ef4444]/10 border border-[#ef4444]/30 flex items-center justify-center flex-shrink-0">
-                    <span className="text-[32px] text-[#ef4444] font-bold">{item.num}</span>
-                  </div>
-                  <div>
-                    <div className="text-[44px] font-semibold text-white leading-tight">{item.title}</div>
-                    <div className="text-[32px] text-[#94a3b8] mt-[8px] leading-relaxed">{item.desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
+        {/* Massive title */}
+        <div className="leading-[0.78]">
+          <div className="text-[340px] font-black tracking-[-0.04em]" style={{ background: "linear-gradient(180deg, #ffffff 0%, #93c5fd 35%, #38bdf8 65%, #0ea5e9 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent", filter: "drop-shadow(0 0 80px rgba(56,189,248,0.35))" }}>
+            MAOE
           </div>
-
-          {/* 方案 */}
-          <div className="bg-[#0f1729]/80 rounded-[32px] border border-[#1e293b] p-[60px]">
-            <div className="flex items-center gap-[20px] mb-[40px]">
-              <div className="w-[64px] h-[64px] rounded-[16px] bg-[#3b82f6]/20 flex items-center justify-center">
-                <span className="text-[36px]">🎯</span>
-              </div>
-              <h2 className="text-[60px] font-bold tracking-[2px]">MAOE 方案</h2>
-            </div>
-            <div className="flex flex-col gap-[24px]">
-              {[
-                "把每个 Skill 定义为 YAML 胶囊，声明 inputs/outputs/risk/rollback",
-                "编译器先做 5 类静态校验，再动 LLM",
-                "同一 goal 编译 economy / balanced / quality 三档",
-                "(quality↑ cost↓ latency↓ risk↓) 五维 Pareto 前沿",
-                "决策 sha256 lock_digest，100% 可复现",
-              ].map((text, i) => (
-                <div key={i} className="flex items-center gap-[20px]">
-                  <div className="w-[24px] h-[24px] rounded-full bg-[#3b82f6]/40 flex-shrink-0"></div>
-                  <span className="text-[34px] text-[#cbd5e1] leading-relaxed">{text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-        </div>
-
-        {/* 中栏：架构 + 创新 */}
-        <div className="flex-1 flex flex-col gap-[60px]">
-          
-          {/* 架构 */}
-          <div className="bg-[#0f1729]/80 rounded-[32px] border border-[#1e293b] p-[60px]">
-            <div className="flex items-center gap-[20px] mb-[50px]">
-              <div className="w-[64px] h-[64px] rounded-[16px] bg-[#8b5cf6]/20 flex items-center justify-center">
-                <span className="text-[36px]">🏗️</span>
-              </div>
-              <h2 className="text-[60px] font-bold tracking-[2px]">系统架构</h2>
-            </div>
-            
-            {/* 架构图 */}
-            <div className="flex flex-col items-center gap-[24px]">
-              {/* CLI */}
-              <div className="w-full h-[80px] bg-[#f59e0b]/10 border-2 border-[#f59e0b]/30 rounded-[20px] flex items-center justify-center">
-                <span className="text-[38px] text-[#f59e0b] font-semibold">CLI: maoe run / benchmark</span>
-              </div>
-              <div className="w-[4px] h-[40px] bg-[#3b82f6]/50 rounded"></div>
-              {/* Engine */}
-              <div className="w-full h-[80px] bg-[#3b82f6]/10 border-2 border-[#3b82f6]/30 rounded-[20px] flex items-center justify-center">
-                <span className="text-[38px] text-[#3b82f6] font-semibold">MAOEEngine（运行管线总指挥）</span>
-              </div>
-              <div className="w-[4px] h-[40px] bg-[#3b82f6]/50 rounded"></div>
-              {/* 6 个子系统 */}
-              <div className="grid grid-cols-3 gap-[20px] w-full">
-                {["Parser", "Evaluator", "Router", "Economist", "Executor", "Quality"].map((name) => (
-                  <div key={name} className="h-[64px] bg-[#1e293b] border border-[#334155] rounded-[14px] flex items-center justify-center">
-                    <span className="text-[32px] text-[#94a3b8]">{name}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="w-[4px] h-[40px] bg-[#3b82f6]/50 rounded"></div>
-              {/* LLM */}
-              <div className="w-full h-[80px] bg-[#10b981]/10 border-2 border-[#10b981]/30 rounded-[20px] flex items-center justify-center">
-                <span className="text-[38px] text-[#10b981] font-semibold">LLM Client → API</span>
-              </div>
-            </div>
-
-            {/* 旁路 */}
-            <div className="grid grid-cols-2 gap-[16px] mt-[40px] pt-[40px] border-t border-[#1e293b]">
-              {["Compiler", "Registry", "Runtime", "Bootstrap"].map((name) => (
-                <div key={name} className="h-[52px] bg-[#1e293b]/50 border border-[#334155]/60 rounded-[12px] flex items-center justify-center">
-                  <span className="text-[28px] text-[#64748b]">{name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* 创新 */}
-          <div className="bg-[#0f1729]/80 rounded-[32px] border border-[#1e293b] p-[60px]">
-            <div className="flex items-center gap-[20px] mb-[40px]">
-              <div className="w-[64px] h-[64px] rounded-[16px] bg-[#f59e0b]/20 flex items-center justify-center">
-                <span className="text-[36px]">💡</span>
-              </div>
-              <h2 className="text-[60px] font-bold tracking-[2px]">关键创新</h2>
-            </div>
-            <div className="grid grid-cols-2 gap-[24px]">
-              {[
-                { title: "Skill 即契约", desc: "YAML 胶囊声明 provides / requires / schemas，编译期发现 capability gap" },
-                { title: "三档 Pareto", desc: "economy / balanced / quality，五维前沿自动选最优档" },
-                { title: "决策 lockfile", desc: "sha256 lock_digest 落盘，append-only 事件/决策流" },
-                { title: "redaction 安全", desc: "落盘前自动脱敏 sk- / Bearer / api_key" },
-              ].map((card, i) => (
-                <div key={i} className="bg-[#1a1f3a] rounded-[20px] p-[30px] border border-[#334155]/40">
-                  <div className="text-[36px] font-bold text-[#f59e0b] mb-[12px]">{card.title}</div>
-                  <div className="text-[28px] text-[#94a3b8] leading-relaxed">{card.desc}</div>
-                </div>
-              ))}
-            </div>
+          <div className="text-[86px] font-light tracking-[0.15em] text-[#94a3b8] -mt-[20px]">
+            Multi-Agent Orchestration Engine
           </div>
         </div>
 
-        {/* 右栏：指标 */}
-        <div className="w-[620px] flex flex-col gap-[60px]">
-          
-          {/* 指标 */}
-          <div className="bg-[#0f1729]/80 rounded-[32px] border border-[#1e293b] p-[60px]">
-            <h2 className="text-[48px] font-bold tracking-[2px] mb-[40px] text-center">工程指标</h2>
-            <div className="flex flex-col gap-[28px]">
-              {[
-                { num: "48", label: "测试用例", color: "#3b82f6" },
-                { num: "100%", label: "Ruff 清洁", color: "#10b981" },
-                { num: "10", label: "Skill 胶囊", color: "#8b5cf6" },
-                { num: "8", label: "Agent 角色", color: "#f59e0b" },
-                { num: "3", label: "候选档位", color: "#ef4444" },
-                { num: "5", label: "静态校验", color: "#06b6d4" },
-              ].map((m, i) => (
-                <div key={i} className="flex items-center gap-[24px] bg-[#1a1f3a]/80 rounded-[20px] p-[32px] border border-[#334155]/30">
-                  <div className="w-[6px] h-[80px] rounded-full flex-shrink-0" style={{ background: m.color }}></div>
-                  <div className="text-[56px] font-black tabular-nums" style={{ color: m.color }}>{m.num}</div>
-                  <div className="text-[32px] text-[#94a3b8] ml-auto">{m.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* One-line pitch */}
+        <div className="mt-[80px] text-[52px] font-medium text-[#cbd5e1]/80 tracking-[0.04em] max-w-[2800px]">
+          Skill 原生编译 · 三档 Pareto 调度 · 决策即代码
+        </div>
 
-          {/* GitHub */}
-          <div className="bg-[#0f1729]/80 rounded-[32px] border border-[#1e293b] p-[60px]">
-            <h2 className="text-[48px] font-bold tracking-[2px] mb-[30px]">开箱即用</h2>
-            <div className="bg-[#0a0f1e] rounded-[20px] p-[40px] font-mono">
-              <div className="text-[28px] text-[#10b981] mb-[16px]">$ git clone github.com/zhongxiaomi06-sudo/maoe</div>
-              <div className="text-[28px] text-[#10b981] mb-[16px]">$ uv sync --extra dev</div>
-              <div className="text-[28px] text-[#10b981] mb-[16px]">$ .venv/bin/pytest -q</div>
-              <div className="text-[28px] text-[#94a3b8]">  → 48 passed in 0.4s</div>
-            </div>
+        {/* Glow orb */}
+        <div className="mt-[120px] relative" style={{ width: 520, height: 520 }}>
+          <div className="absolute inset-0 rounded-full" style={{ background: "radial-gradient(circle, rgba(56,189,248,0.25) 0%, rgba(168,85,247,0.12) 45%, transparent 70%)", filter: "blur(40px)" }}></div>
+          <div className="absolute inset-[60px] rounded-full border border-[#38bdf8]/20" style={{ boxShadow: "inset 0 0 80px rgba(56,189,248,0.08)" }}></div>
+          <div className="absolute inset-[130px] rounded-full bg-[#38bdf8]/5 border border-[#38bdf8]/15"></div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
+              <circle cx="100" cy="100" r="95" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="8 8" opacity="0.4"/>
+              <circle cx="100" cy="100" r="70" stroke="#a855f7" strokeWidth="1" strokeDasharray="4 6" opacity="0.3"/>
+              <circle cx="100" cy="100" r="40" stroke="#facc15" strokeWidth="2" opacity="0.5"/>
+              <path d="M 100 60 L 100 100 L 135 120" stroke="#38bdf8" strokeWidth="3" strokeLinecap="round"/>
+              <circle cx="100" cy="100" r="8" fill="#38bdf8" opacity="0.6"/>
+            </svg>
           </div>
-
         </div>
       </div>
 
-      {/* ===== 底部 ===== */}
-      <div className="mx-[120px] mt-[60px] mb-[40px] pt-[40px] border-t-2 border-[#1e293b] flex justify-between items-center">
-        <span className="text-[30px] text-[#64748b]">Python 3.12 · asyncio · pydantic · httpx · uv · hatchling</span>
-        <span className="text-[30px] text-[#64748b]">github.com/zhongxiaomi06-sudo/maoe</span>
+      {/* ─── THREE PILLARS ─── */}
+      <div className="relative z-10 mt-[160px] px-[180px] grid grid-cols-3 gap-[80px]">
+        {[
+          {
+            num: "01",
+            title: "Skill 即契约",
+            desc: "YAML 胶囊声明类型与风险，编译期静态校验",
+            icon: <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>,
+          },
+          {
+            num: "02",
+            title: "Pareto 三档",
+            desc: "economy / balanced / quality，五维前沿自动选最优",
+            icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>,
+          },
+          {
+            num: "03",
+            title: "决策可追溯",
+            desc: "lockfile + append-only 事件流，100% 可复现",
+            icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>,
+          },
+        ].map((p, i) => (
+          <div key={i} className="group">
+            <div className="rounded-[40px] border border-[#1e293b]/80 bg-[#0f1729]/60 p-[80px] backdrop-blur transition-all" style={{ boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.03), 0 30px 60px -30px rgba(0,0,0,0.5)" }}>
+              <div className="text-[120px] font-black tracking-[-0.03em] text-[#1e293b] group-hover:text-[#38bdf8]/20 transition-colors">{p.num}</div>
+              <div className="w-[48px] h-[48px] text-[#38bdf8] mt-[-20px] mb-[40px]">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">{p.icon}</svg>
+              </div>
+              <div className="text-[60px] font-bold text-white mb-[24px]">{p.title}</div>
+              <div className="text-[38px] text-[#64748b] leading-relaxed">{p.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ─── METRICS STRIP ─── */}
+      <div className="relative z-10 mt-[160px] mx-[180px] rounded-[40px] border border-[#1e293b]/60 bg-[#0f1729]/40 p-[80px] flex items-center justify-around">
+        {[
+          ["48", "Tests"],
+          ["100%", "Ruff"],
+          ["10", "Skills"],
+          ["8", "Agents"],
+          ["3", "Variants"],
+          ["5", "Checks"],
+        ].map(([n, l], i) => (
+          <div key={i} className="flex flex-col items-center gap-[16px]">
+            <div className="text-[100px] font-black tracking-[-0.02em] tabular-nums" style={{ background: "linear-gradient(180deg, #facc15 0%, #f97316 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>{n}</div>
+            <div className="text-[32px] text-[#475569] tracking-[0.15em] uppercase">{l}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* ─── ARCHITECTURE DIAGRAM ─── */}
+      <div className="relative z-10 mt-[160px] mx-[180px]">
+        <div className="text-[32px] text-[#475569] tracking-[0.3em] uppercase mb-[60px] text-center">Pipeline</div>
+        <div className="flex items-center gap-[40px] justify-center flex-wrap">
+          {["Parser", "Evaluator", "Router", "Economist", "Executor", "Quality"].map((name, i) => (
+            <div key={name} className="flex items-center gap-[40px]">
+              <div className="h-[120px] w-[240px] rounded-[24px] border border-[#38bdf8]/20 bg-[#0f1729]/80 flex items-center justify-center backdrop-blur" style={{ boxShadow: "0 0 40px rgba(56,189,248,0.06)" }}>
+                <span className="text-[40px] font-semibold text-[#94a3b8] tracking-wide">{name}</span>
+              </div>
+              {i < 5 && (
+                <svg width="40" height="6" viewBox="0 0 40 6" className="text-[#38bdf8]/40">
+                  <path d="M0 3 L30 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M32 0 L40 3 L32 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                </svg>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ─── COMMAND LINE ─── */}
+      <div className="relative z-10 mt-[160px] mx-[180px]">
+        <div className="rounded-[40px] border border-[#38bdf8]/15 bg-[#020617]/80 p-[80px] font-mono backdrop-blur overflow-hidden">
+          <div className="flex items-center gap-[20px] mb-[50px]">
+            <div className="w-[28px] h-[28px] rounded-full bg-[#ef4444]/60"></div>
+            <div className="w-[28px] h-[28px] rounded-full bg-[#facc15]/60"></div>
+            <div className="w-[28px] h-[28px] rounded-full bg-[#22c55e]/60"></div>
+            <div className="ml-[30px] text-[32px] text-[#475569]">Terminal</div>
+          </div>
+          {[
+            "$ git clone github.com/zhongxiaomi06-sudo/maoe",
+            "$ uv sync --extra dev",
+            "$ .venv/bin/pytest -q",
+            "  → 48 passed in 0.4s",
+            "$ .venv/bin/maoe run \"写一个反转字符串的函数\"",
+          ].map((line, i) => (
+            <div key={i} className={`text-[36px] leading-[1.8] ${line.startsWith("  →") ? "text-[#22c55e]" : "text-[#38bdf8]"}`}>{line}</div>
+          ))}
+        </div>
+      </div>
+
+      {/* ─── FOOTER ─── */}
+      <div className="relative z-10 mt-[160px] pb-[80px] flex items-center justify-between px-[180px]">
+        <div className="text-[30px] text-[#334155]">Python 3.12 · asyncio · pydantic · httpx · uv · hatchling</div>
+        <div className="text-[30px] text-[#475569] tracking-wide">github.com/zhongxiaomi06-sudo/maoe</div>
       </div>
 
     </div>
