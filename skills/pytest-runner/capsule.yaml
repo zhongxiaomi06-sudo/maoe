@@ -1,0 +1,27 @@
+id: python.pytest-runner
+version: 1.0.0
+kind: tool
+description: Run pytest and normalize the result into a typed report.
+capabilities:
+  provides: [test.report]
+  requires: [source.modified, test.files, shell.pytest]
+  schemas:
+    source.modified: source-tree/python-v1
+    test.files: test-suite/pytest-v1
+    test.report: test-report/pytest-v1
+inputs:
+  source: {type: source-tree/python-v1, required: true}
+  tests: {type: test-suite/pytest-v1, required: true}
+outputs: {report: {type: test-report/pytest-v1, required: true}}
+preconditions: [pytest_available]
+effects: {filesystem: read, network: none, external_side_effects: false}
+resources: {expected_tokens: 300, expected_seconds: 35, expected_cost: 0.0002}
+risk: {level: low}
+quality: {validators: [pytest_exit_zero, test_report_schema_valid], minimum_score: 0.94}
+certification: trusted
+compatible_agents: [test-agent]
+languages: [python]
+task_types: [feature, bugfix, refactor]
+tags: [python, pytest, execution]
+context_cost: 250
+historical_success: 0.98

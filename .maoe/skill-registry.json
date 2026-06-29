@@ -1,0 +1,949 @@
+{
+  "revoked": [],
+  "schema_version": "1.0.0",
+  "skills": [
+    {
+      "capabilities": {
+        "provides": [
+          "docs.updated"
+        ],
+        "requires": [
+          "source.modified",
+          "requirement.spec",
+          "filesystem.write"
+        ],
+        "schemas": {
+          "docs.updated": "docs/markdown-v1",
+          "requirement.spec": "requirement-spec/v1",
+          "source.modified": "source-tree/python-v1"
+        }
+      },
+      "certification": 2,
+      "compatible_agents": [
+        "code-agent",
+        "review-agent"
+      ],
+      "context_cost": 700,
+      "description": "Update documentation from requirements and the implemented source change.",
+      "effects": {
+        "external_side_effects": false,
+        "filesystem": "write",
+        "network": "none",
+        "writes": [
+          "docs/**"
+        ]
+      },
+      "historical_success": 0.89,
+      "id": "docs.implementation-update",
+      "inputs": {
+        "requirements": {
+          "required": true,
+          "type": "requirement-spec/v1"
+        },
+        "source": {
+          "required": true,
+          "type": "source-tree/python-v1"
+        }
+      },
+      "kind": "workflow",
+      "languages": [
+        "python"
+      ],
+      "outputs": {
+        "documentation": {
+          "required": true,
+          "type": "docs/markdown-v1"
+        }
+      },
+      "preconditions": [],
+      "quality": {
+        "minimum_score": 0.88,
+        "validators": [
+          "markdown_valid",
+          "documented_behavior_matches_source"
+        ]
+      },
+      "resources": {
+        "expected_cost": 0.002,
+        "expected_seconds": 15.0,
+        "expected_tokens": 1600
+      },
+      "risk": {
+        "level": 2,
+        "rollback": "git_restore_documentation"
+      },
+      "tags": [
+        "documentation"
+      ],
+      "task_types": [
+        "feature",
+        "bugfix",
+        "refactor"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": {
+        "provides": [
+          "requirement.spec",
+          "workflow.plan"
+        ],
+        "requires": [
+          "requirement.raw"
+        ],
+        "schemas": {
+          "requirement.raw": "text/v1",
+          "requirement.spec": "requirement-spec/v1",
+          "workflow.plan": "workflow-plan/v1"
+        }
+      },
+      "certification": 3,
+      "compatible_agents": [
+        "planner"
+      ],
+      "context_cost": 600,
+      "description": "Convert a raw engineering goal into typed requirements and a workflow plan.",
+      "effects": {
+        "external_side_effects": false,
+        "filesystem": "none",
+        "network": "none",
+        "writes": []
+      },
+      "historical_success": 0.94,
+      "id": "planning.task-decomposition",
+      "inputs": {
+        "goal": {
+          "required": true,
+          "type": "text/v1"
+        }
+      },
+      "kind": "workflow",
+      "languages": [
+        "python"
+      ],
+      "outputs": {
+        "plan": {
+          "required": true,
+          "type": "workflow-plan/v1"
+        },
+        "requirements": {
+          "required": true,
+          "type": "requirement-spec/v1"
+        }
+      },
+      "preconditions": [],
+      "quality": {
+        "minimum_score": 0.9,
+        "validators": [
+          "requirements_schema_valid"
+        ]
+      },
+      "resources": {
+        "expected_cost": 0.0005,
+        "expected_seconds": 8.0,
+        "expected_tokens": 1000
+      },
+      "risk": {
+        "level": 1,
+        "rollback": null
+      },
+      "tags": [
+        "planning",
+        "decomposition"
+      ],
+      "task_types": [
+        "feature",
+        "bugfix",
+        "refactor"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": {
+        "provides": [
+          "source.modified"
+        ],
+        "requires": [
+          "code.structure",
+          "requirement.spec",
+          "filesystem.write"
+        ],
+        "schemas": {
+          "code.structure": "code-structure/python-v1",
+          "requirement.spec": "requirement-spec/v1",
+          "source.modified": "source-tree/python-v1"
+        }
+      },
+      "certification": 2,
+      "compatible_agents": [
+        "code-agent"
+      ],
+      "context_cost": 1400,
+      "description": "Implement a Python change from requirements and structural context.",
+      "effects": {
+        "external_side_effects": false,
+        "filesystem": "write",
+        "network": "none",
+        "writes": [
+          "src/**"
+        ]
+      },
+      "historical_success": 0.91,
+      "id": "python.implementation",
+      "inputs": {
+        "requirements": {
+          "required": true,
+          "type": "requirement-spec/v1"
+        },
+        "structure": {
+          "required": true,
+          "type": "code-structure/python-v1"
+        }
+      },
+      "kind": "workflow",
+      "languages": [
+        "python"
+      ],
+      "outputs": {
+        "changed_source": {
+          "required": true,
+          "type": "source-tree/python-v1"
+        }
+      },
+      "preconditions": [],
+      "quality": {
+        "minimum_score": 0.89,
+        "validators": [
+          "source_parses",
+          "acceptance_criteria_met"
+        ]
+      },
+      "resources": {
+        "expected_cost": 0.01,
+        "expected_seconds": 45.0,
+        "expected_tokens": 4500
+      },
+      "risk": {
+        "level": 2,
+        "rollback": "git_restore_changed_source"
+      },
+      "tags": [
+        "python",
+        "implementation"
+      ],
+      "task_types": [
+        "feature",
+        "bugfix",
+        "refactor"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": {
+        "provides": [
+          "test.files"
+        ],
+        "requires": [
+          "source.python",
+          "requirement.spec",
+          "filesystem.write"
+        ],
+        "schemas": {
+          "requirement.spec": "requirement-spec/v1",
+          "source.python": "source-tree/python-v1",
+          "test.files": "test-suite/pytest-v1"
+        }
+      },
+      "certification": 2,
+      "compatible_agents": [
+        "test-agent",
+        "code-agent"
+      ],
+      "context_cost": 1000,
+      "description": "Generate pytest tests from Python source and acceptance criteria.",
+      "effects": {
+        "external_side_effects": false,
+        "filesystem": "write",
+        "network": "none",
+        "writes": [
+          "tests/**"
+        ]
+      },
+      "historical_success": 0.9,
+      "id": "python.pytest-generator",
+      "inputs": {
+        "requirements": {
+          "required": true,
+          "type": "requirement-spec/v1"
+        },
+        "source_files": {
+          "required": true,
+          "type": "array[path]"
+        }
+      },
+      "kind": "workflow",
+      "languages": [
+        "python"
+      ],
+      "outputs": {
+        "test_files": {
+          "required": true,
+          "type": "test-suite/pytest-v1"
+        }
+      },
+      "preconditions": [],
+      "quality": {
+        "minimum_score": 0.88,
+        "validators": [
+          "tests_collect",
+          "acceptance_criteria_covered"
+        ]
+      },
+      "resources": {
+        "expected_cost": 0.004,
+        "expected_seconds": 25.0,
+        "expected_tokens": 2400
+      },
+      "risk": {
+        "level": 2,
+        "rollback": "git_restore_generated_tests"
+      },
+      "tags": [
+        "python",
+        "pytest",
+        "generation"
+      ],
+      "task_types": [
+        "feature",
+        "bugfix",
+        "refactor"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": {
+        "provides": [
+          "test.report"
+        ],
+        "requires": [
+          "source.modified",
+          "test.files",
+          "shell.pytest"
+        ],
+        "schemas": {
+          "source.modified": "source-tree/python-v1",
+          "test.files": "test-suite/pytest-v1",
+          "test.report": "test-report/pytest-v1"
+        }
+      },
+      "certification": 3,
+      "compatible_agents": [
+        "test-agent"
+      ],
+      "context_cost": 250,
+      "description": "Run pytest and normalize the result into a typed report.",
+      "effects": {
+        "external_side_effects": false,
+        "filesystem": "read",
+        "network": "none",
+        "writes": []
+      },
+      "historical_success": 0.98,
+      "id": "python.pytest-runner",
+      "inputs": {
+        "source": {
+          "required": true,
+          "type": "source-tree/python-v1"
+        },
+        "tests": {
+          "required": true,
+          "type": "test-suite/pytest-v1"
+        }
+      },
+      "kind": "tool",
+      "languages": [
+        "python"
+      ],
+      "outputs": {
+        "report": {
+          "required": true,
+          "type": "test-report/pytest-v1"
+        }
+      },
+      "preconditions": [
+        "pytest_available"
+      ],
+      "quality": {
+        "minimum_score": 0.94,
+        "validators": [
+          "pytest_exit_zero",
+          "test_report_schema_valid"
+        ]
+      },
+      "resources": {
+        "expected_cost": 0.0002,
+        "expected_seconds": 35.0,
+        "expected_tokens": 300
+      },
+      "risk": {
+        "level": 1,
+        "rollback": null
+      },
+      "tags": [
+        "python",
+        "pytest",
+        "execution"
+      ],
+      "task_types": [
+        "feature",
+        "bugfix",
+        "refactor"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": {
+        "provides": [
+          "code.structure"
+        ],
+        "requires": [
+          "source.python",
+          "filesystem.read"
+        ],
+        "schemas": {
+          "code.structure": "code-structure/python-v1",
+          "source.python": "source-tree/python-v1"
+        }
+      },
+      "certification": 3,
+      "compatible_agents": [
+        "architect",
+        "code-agent"
+      ],
+      "context_cost": 800,
+      "description": "Analyze Python source structure before implementation.",
+      "effects": {
+        "external_side_effects": false,
+        "filesystem": "read",
+        "network": "none",
+        "writes": []
+      },
+      "historical_success": 0.95,
+      "id": "python.source-analysis",
+      "inputs": {
+        "source_files": {
+          "required": true,
+          "type": "array[path]"
+        }
+      },
+      "kind": "workflow",
+      "languages": [
+        "python"
+      ],
+      "outputs": {
+        "structure": {
+          "required": true,
+          "type": "code-structure/python-v1"
+        }
+      },
+      "preconditions": [],
+      "quality": {
+        "minimum_score": 0.91,
+        "validators": [
+          "source_paths_resolve",
+          "structure_schema_valid"
+        ]
+      },
+      "resources": {
+        "expected_cost": 0.0015,
+        "expected_seconds": 10.0,
+        "expected_tokens": 1800
+      },
+      "risk": {
+        "level": 1,
+        "rollback": null
+      },
+      "tags": [
+        "python",
+        "analysis"
+      ],
+      "task_types": [
+        "feature",
+        "bugfix",
+        "refactor"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": {
+        "provides": [
+          "source.modified",
+          "test.files",
+          "test.report"
+        ],
+        "requires": [
+          "source.python",
+          "requirement.spec",
+          "filesystem.write",
+          "shell.pytest"
+        ],
+        "schemas": {
+          "requirement.spec": "requirement-spec/v1",
+          "source.modified": "source-tree/python-v1",
+          "source.python": "source-tree/python-v1",
+          "test.files": "test-suite/pytest-v1",
+          "test.report": "test-report/pytest-v1"
+        }
+      },
+      "certification": 2,
+      "compatible_agents": [
+        "code-agent",
+        "test-agent",
+        "debug-agent"
+      ],
+      "context_cost": 1800,
+      "description": "Implement a Python change and produce tests and a passing test report in one bounded flow.",
+      "effects": {
+        "external_side_effects": false,
+        "filesystem": "write",
+        "network": "none",
+        "writes": [
+          "src/**",
+          "tests/**"
+        ]
+      },
+      "historical_success": 0.86,
+      "id": "python.tdd-composite",
+      "inputs": {
+        "acceptance_criteria": {
+          "required": true,
+          "type": "array[string]"
+        },
+        "source_files": {
+          "required": true,
+          "type": "array[path]"
+        }
+      },
+      "kind": "workflow",
+      "languages": [
+        "python"
+      ],
+      "outputs": {
+        "changed_files": {
+          "required": true,
+          "type": "array[path]"
+        },
+        "test_files": {
+          "required": true,
+          "type": "array[path]"
+        },
+        "test_report": {
+          "required": true,
+          "type": "test-report/pytest-v1"
+        }
+      },
+      "preconditions": [
+        "python_project_detected",
+        "pytest_available"
+      ],
+      "quality": {
+        "minimum_score": 0.84,
+        "validators": [
+          "pytest_exit_zero",
+          "acceptance_criteria_met"
+        ]
+      },
+      "resources": {
+        "expected_cost": 0.006,
+        "expected_seconds": 80.0,
+        "expected_tokens": 7000
+      },
+      "risk": {
+        "level": 2,
+        "rollback": "git_restore_changed_files"
+      },
+      "tags": [
+        "python",
+        "tdd",
+        "pytest"
+      ],
+      "task_types": [
+        "feature",
+        "bugfix",
+        "refactor"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": {
+        "provides": [
+          "quality.report"
+        ],
+        "requires": [
+          "source.modified",
+          "test.report"
+        ],
+        "schemas": {
+          "quality.report": "quality-report/v1",
+          "source.modified": "source-tree/python-v1",
+          "test.report": "test-report/pytest-v1"
+        }
+      },
+      "certification": 3,
+      "compatible_agents": [
+        "test-agent",
+        "review-agent"
+      ],
+      "context_cost": 700,
+      "description": "Verify changed source and test evidence with deterministic quality gates.",
+      "effects": {
+        "external_side_effects": false,
+        "filesystem": "read",
+        "network": "none",
+        "writes": []
+      },
+      "historical_success": 0.96,
+      "id": "quality.deterministic-verification",
+      "inputs": {
+        "test_report": {
+          "required": true,
+          "type": "test-report/pytest-v1"
+        }
+      },
+      "kind": "workflow",
+      "languages": [
+        "python"
+      ],
+      "outputs": {
+        "quality_report": {
+          "required": true,
+          "type": "quality-report/v1"
+        }
+      },
+      "preconditions": [],
+      "quality": {
+        "minimum_score": 0.92,
+        "validators": [
+          "quality_report_schema_valid",
+          "deterministic_checks_present"
+        ]
+      },
+      "resources": {
+        "expected_cost": 0.0015,
+        "expected_seconds": 8.0,
+        "expected_tokens": 1200
+      },
+      "risk": {
+        "level": 1,
+        "rollback": null
+      },
+      "tags": [
+        "quality",
+        "verification"
+      ],
+      "task_types": [
+        "feature",
+        "bugfix",
+        "refactor"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": {
+        "provides": [
+          "recovery.plan"
+        ],
+        "requires": [
+          "failure.evidence"
+        ],
+        "schemas": {
+          "failure.evidence": "failure-evidence/v1",
+          "recovery.plan": "recovery-plan/v1"
+        }
+      },
+      "certification": 2,
+      "compatible_agents": [
+        "debug-agent",
+        "loop-operator"
+      ],
+      "context_cost": 650,
+      "description": "Classify execution failures and emit a bounded recovery plan.",
+      "effects": {
+        "external_side_effects": false,
+        "filesystem": "none",
+        "network": "none",
+        "writes": []
+      },
+      "historical_success": 0.88,
+      "id": "recovery.bounded-loop",
+      "inputs": {
+        "failure": {
+          "required": true,
+          "type": "failure-evidence/v1"
+        }
+      },
+      "kind": "workflow",
+      "languages": [
+        "python"
+      ],
+      "outputs": {
+        "plan": {
+          "required": true,
+          "type": "recovery-plan/v1"
+        }
+      },
+      "preconditions": [],
+      "quality": {
+        "minimum_score": 0.88,
+        "validators": [
+          "retry_limit_present",
+          "recovery_action_valid"
+        ]
+      },
+      "resources": {
+        "expected_cost": 0.001,
+        "expected_seconds": 5.0,
+        "expected_tokens": 1200
+      },
+      "risk": {
+        "level": 1,
+        "rollback": null
+      },
+      "tags": [
+        "recovery",
+        "retry"
+      ],
+      "task_types": [
+        "feature",
+        "bugfix",
+        "refactor"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": {
+        "provides": [
+          "review.report"
+        ],
+        "requires": [
+          "source.modified",
+          "test.report"
+        ],
+        "schemas": {
+          "review.report": "review-report/v1",
+          "source.modified": "source-tree/python-v1",
+          "test.report": "test-report/pytest-v1"
+        }
+      },
+      "certification": 2,
+      "compatible_agents": [
+        "review-agent"
+      ],
+      "context_cost": 1000,
+      "description": "Perform an independent code review after deterministic tests pass.",
+      "effects": {
+        "external_side_effects": false,
+        "filesystem": "read",
+        "network": "none",
+        "writes": []
+      },
+      "historical_success": 0.92,
+      "id": "review.independent-code-review",
+      "inputs": {
+        "source": {
+          "required": true,
+          "type": "source-tree/python-v1"
+        },
+        "tests": {
+          "required": true,
+          "type": "test-report/pytest-v1"
+        }
+      },
+      "kind": "workflow",
+      "languages": [
+        "python"
+      ],
+      "outputs": {
+        "review": {
+          "required": true,
+          "type": "review-report/v1"
+        }
+      },
+      "preconditions": [],
+      "quality": {
+        "minimum_score": 0.93,
+        "validators": [
+          "review_report_schema_valid",
+          "no_unresolved_critical_findings"
+        ]
+      },
+      "resources": {
+        "expected_cost": 0.004,
+        "expected_seconds": 15.0,
+        "expected_tokens": 2200
+      },
+      "risk": {
+        "level": 1,
+        "rollback": null
+      },
+      "tags": [
+        "review",
+        "quality"
+      ],
+      "task_types": [
+        "feature",
+        "bugfix",
+        "refactor"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": {
+        "provides": [
+          "execution.route"
+        ],
+        "requires": [
+          "workflow.plan",
+          "model.registry"
+        ],
+        "schemas": {
+          "execution.route": "execution-route/v1",
+          "model.registry": "model-registry/v1",
+          "workflow.plan": "workflow-plan/v1"
+        }
+      },
+      "certification": 2,
+      "compatible_agents": [
+        "planner",
+        "loop-operator"
+      ],
+      "context_cost": 350,
+      "description": "Select an explainable model tier and budget for a compiled workflow.",
+      "effects": {
+        "external_side_effects": false,
+        "filesystem": "none",
+        "network": "none",
+        "writes": []
+      },
+      "historical_success": 0.91,
+      "id": "routing.cost-aware",
+      "inputs": {
+        "plan": {
+          "required": true,
+          "type": "workflow-plan/v1"
+        }
+      },
+      "kind": "workflow",
+      "languages": [
+        "python"
+      ],
+      "outputs": {
+        "route": {
+          "required": true,
+          "type": "execution-route/v1"
+        }
+      },
+      "preconditions": [],
+      "quality": {
+        "minimum_score": 0.88,
+        "validators": [
+          "route_budget_valid"
+        ]
+      },
+      "resources": {
+        "expected_cost": 0.0002,
+        "expected_seconds": 2.0,
+        "expected_tokens": 500
+      },
+      "risk": {
+        "level": 1,
+        "rollback": null
+      },
+      "tags": [
+        "routing",
+        "cost"
+      ],
+      "task_types": [
+        "feature",
+        "bugfix",
+        "refactor"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": {
+        "provides": [
+          "security.report"
+        ],
+        "requires": [
+          "source.modified",
+          "shell.bandit"
+        ],
+        "schemas": {
+          "security.report": "security-report/v1",
+          "source.modified": "source-tree/python-v1"
+        }
+      },
+      "certification": 3,
+      "compatible_agents": [
+        "test-agent",
+        "review-agent"
+      ],
+      "context_cost": 300,
+      "description": "Scan changed Python source and emit a normalized security report.",
+      "effects": {
+        "external_side_effects": false,
+        "filesystem": "read",
+        "network": "none",
+        "writes": []
+      },
+      "historical_success": 0.97,
+      "id": "security.python-scan",
+      "inputs": {
+        "source": {
+          "required": true,
+          "type": "source-tree/python-v1"
+        }
+      },
+      "kind": "tool",
+      "languages": [
+        "python"
+      ],
+      "outputs": {
+        "report": {
+          "required": true,
+          "type": "security-report/v1"
+        }
+      },
+      "preconditions": [
+        "security_scanner_available"
+      ],
+      "quality": {
+        "minimum_score": 0.92,
+        "validators": [
+          "security_report_schema_valid",
+          "no_high_findings"
+        ]
+      },
+      "resources": {
+        "expected_cost": 0.0002,
+        "expected_seconds": 15.0,
+        "expected_tokens": 300
+      },
+      "risk": {
+        "level": 1,
+        "rollback": null
+      },
+      "tags": [
+        "security",
+        "static-analysis"
+      ],
+      "task_types": [
+        "feature",
+        "bugfix",
+        "refactor"
+      ],
+      "version": "1.0.0"
+    }
+  ]
+}

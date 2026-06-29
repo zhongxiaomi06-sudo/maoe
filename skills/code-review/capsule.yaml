@@ -1,0 +1,26 @@
+id: review.independent-code-review
+version: 1.0.0
+kind: workflow
+description: Perform an independent code review after deterministic tests pass.
+capabilities:
+  provides: [review.report]
+  requires: [source.modified, test.report]
+  schemas:
+    source.modified: source-tree/python-v1
+    test.report: test-report/pytest-v1
+    review.report: review-report/v1
+inputs:
+  source: {type: source-tree/python-v1, required: true}
+  tests: {type: test-report/pytest-v1, required: true}
+outputs: {review: {type: review-report/v1, required: true}}
+effects: {filesystem: read, network: none, external_side_effects: false}
+resources: {expected_tokens: 2200, expected_seconds: 15, expected_cost: 0.004}
+risk: {level: low}
+quality: {validators: [review_report_schema_valid, no_unresolved_critical_findings], minimum_score: 0.93}
+certification: verified
+compatible_agents: [review-agent]
+languages: [python]
+task_types: [feature, bugfix, refactor]
+tags: [review, quality]
+context_cost: 1000
+historical_success: 0.92

@@ -1,0 +1,36 @@
+id: python.tdd-composite
+version: 1.0.0
+kind: workflow
+description: Implement a Python change and produce tests and a passing test report in one bounded flow.
+capabilities:
+  provides: [source.modified, test.files, test.report]
+  requires: [source.python, requirement.spec, filesystem.write, shell.pytest]
+  schemas:
+    source.python: source-tree/python-v1
+    requirement.spec: requirement-spec/v1
+    source.modified: source-tree/python-v1
+    test.files: test-suite/pytest-v1
+    test.report: test-report/pytest-v1
+inputs:
+  source_files: {type: "array[path]", required: true}
+  acceptance_criteria: {type: "array[string]", required: true}
+outputs:
+  changed_files: {type: "array[path]", required: true}
+  test_files: {type: "array[path]", required: true}
+  test_report: {type: test-report/pytest-v1, required: true}
+preconditions: [python_project_detected, pytest_available]
+effects:
+  filesystem: write
+  network: none
+  external_side_effects: false
+  writes: [src/**, tests/**]
+resources: {expected_tokens: 7000, expected_seconds: 80, expected_cost: 0.006}
+risk: {level: medium, rollback: git_restore_changed_files}
+quality: {validators: [pytest_exit_zero, acceptance_criteria_met], minimum_score: 0.84}
+certification: verified
+compatible_agents: [code-agent, test-agent, debug-agent]
+languages: [python]
+task_types: [feature, bugfix, refactor]
+tags: [python, tdd, pytest]
+context_cost: 1800
+historical_success: 0.86

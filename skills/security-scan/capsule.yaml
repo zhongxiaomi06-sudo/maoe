@@ -1,0 +1,24 @@
+id: security.python-scan
+version: 1.0.0
+kind: tool
+description: Scan changed Python source and emit a normalized security report.
+capabilities:
+  provides: [security.report]
+  requires: [source.modified, shell.bandit]
+  schemas:
+    source.modified: source-tree/python-v1
+    security.report: security-report/v1
+inputs: {source: {type: source-tree/python-v1, required: true}}
+outputs: {report: {type: security-report/v1, required: true}}
+preconditions: [security_scanner_available]
+effects: {filesystem: read, network: none, external_side_effects: false}
+resources: {expected_tokens: 300, expected_seconds: 15, expected_cost: 0.0002}
+risk: {level: low}
+quality: {validators: [security_report_schema_valid, no_high_findings], minimum_score: 0.92}
+certification: trusted
+compatible_agents: [test-agent, review-agent]
+languages: [python]
+task_types: [feature, bugfix, refactor]
+tags: [security, static-analysis]
+context_cost: 300
+historical_success: 0.97

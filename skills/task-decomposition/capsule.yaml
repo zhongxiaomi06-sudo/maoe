@@ -1,0 +1,26 @@
+id: planning.task-decomposition
+version: 1.0.0
+kind: workflow
+description: Convert a raw engineering goal into typed requirements and a workflow plan.
+capabilities:
+  provides: [requirement.spec, workflow.plan]
+  requires: [requirement.raw]
+  schemas:
+    requirement.raw: text/v1
+    requirement.spec: requirement-spec/v1
+    workflow.plan: workflow-plan/v1
+inputs: {goal: {type: text/v1, required: true}}
+outputs:
+  requirements: {type: requirement-spec/v1, required: true}
+  plan: {type: workflow-plan/v1, required: true}
+effects: {filesystem: none, network: none, external_side_effects: false}
+resources: {expected_tokens: 1000, expected_seconds: 8, expected_cost: 0.0005}
+risk: {level: low}
+quality: {validators: [requirements_schema_valid], minimum_score: 0.90}
+certification: trusted
+compatible_agents: [planner]
+languages: [python]
+task_types: [feature, bugfix, refactor]
+tags: [planning, decomposition]
+context_cost: 600
+historical_success: 0.94

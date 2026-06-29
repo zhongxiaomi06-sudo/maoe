@@ -1,0 +1,23 @@
+id: recovery.bounded-loop
+version: 1.0.0
+kind: workflow
+description: Classify execution failures and emit a bounded recovery plan.
+capabilities:
+  provides: [recovery.plan]
+  requires: [failure.evidence]
+  schemas:
+    failure.evidence: failure-evidence/v1
+    recovery.plan: recovery-plan/v1
+inputs: {failure: {type: failure-evidence/v1, required: true}}
+outputs: {plan: {type: recovery-plan/v1, required: true}}
+effects: {filesystem: none, network: none, external_side_effects: false}
+resources: {expected_tokens: 1200, expected_seconds: 5, expected_cost: 0.001}
+risk: {level: low}
+quality: {validators: [retry_limit_present, recovery_action_valid], minimum_score: 0.88}
+certification: verified
+compatible_agents: [debug-agent, loop-operator]
+languages: [python]
+task_types: [feature, bugfix, refactor]
+tags: [recovery, retry]
+context_cost: 650
+historical_success: 0.88

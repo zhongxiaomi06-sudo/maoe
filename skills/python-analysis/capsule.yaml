@@ -1,0 +1,23 @@
+id: python.source-analysis
+version: 1.0.0
+kind: workflow
+description: Analyze Python source structure before implementation.
+capabilities:
+  provides: [code.structure]
+  requires: [source.python, filesystem.read]
+  schemas:
+    source.python: source-tree/python-v1
+    code.structure: code-structure/python-v1
+inputs: {source_files: {type: "array[path]", required: true}}
+outputs: {structure: {type: code-structure/python-v1, required: true}}
+effects: {filesystem: read, network: none, external_side_effects: false}
+resources: {expected_tokens: 1800, expected_seconds: 10, expected_cost: 0.0015}
+risk: {level: low}
+quality: {validators: [source_paths_resolve, structure_schema_valid], minimum_score: 0.91}
+certification: trusted
+compatible_agents: [architect, code-agent]
+languages: [python]
+task_types: [feature, bugfix, refactor]
+tags: [python, analysis]
+context_cost: 800
+historical_success: 0.95

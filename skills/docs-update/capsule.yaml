@@ -1,0 +1,30 @@
+id: docs.implementation-update
+version: 1.0.0
+kind: workflow
+description: Update documentation from requirements and the implemented source change.
+capabilities:
+  provides: [docs.updated]
+  requires: [source.modified, requirement.spec, filesystem.write]
+  schemas:
+    source.modified: source-tree/python-v1
+    requirement.spec: requirement-spec/v1
+    docs.updated: docs/markdown-v1
+inputs:
+  source: {type: source-tree/python-v1, required: true}
+  requirements: {type: requirement-spec/v1, required: true}
+outputs: {documentation: {type: docs/markdown-v1, required: true}}
+effects:
+  filesystem: write
+  network: none
+  external_side_effects: false
+  writes: [docs/**]
+resources: {expected_tokens: 1600, expected_seconds: 15, expected_cost: 0.002}
+risk: {level: medium, rollback: git_restore_documentation}
+quality: {validators: [markdown_valid, documented_behavior_matches_source], minimum_score: 0.88}
+certification: verified
+compatible_agents: [code-agent, review-agent]
+languages: [python]
+task_types: [feature, bugfix, refactor]
+tags: [documentation]
+context_cost: 700
+historical_success: 0.89

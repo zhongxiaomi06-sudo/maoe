@@ -1,0 +1,30 @@
+id: python.pytest-generator
+version: 1.0.0
+kind: workflow
+description: Generate pytest tests from Python source and acceptance criteria.
+capabilities:
+  provides: [test.files]
+  requires: [source.python, requirement.spec, filesystem.write]
+  schemas:
+    source.python: source-tree/python-v1
+    requirement.spec: requirement-spec/v1
+    test.files: test-suite/pytest-v1
+inputs:
+  source_files: {type: "array[path]", required: true}
+  requirements: {type: requirement-spec/v1, required: true}
+outputs: {test_files: {type: test-suite/pytest-v1, required: true}}
+effects:
+  filesystem: write
+  network: none
+  external_side_effects: false
+  writes: [tests/**]
+resources: {expected_tokens: 2400, expected_seconds: 25, expected_cost: 0.004}
+risk: {level: medium, rollback: git_restore_generated_tests}
+quality: {validators: [tests_collect, acceptance_criteria_covered], minimum_score: 0.88}
+certification: verified
+compatible_agents: [test-agent, code-agent]
+languages: [python]
+task_types: [feature, bugfix, refactor]
+tags: [python, pytest, generation]
+context_cost: 1000
+historical_success: 0.90

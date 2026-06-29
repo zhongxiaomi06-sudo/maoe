@@ -1,0 +1,24 @@
+id: routing.cost-aware
+version: 1.0.0
+kind: workflow
+description: Select an explainable model tier and budget for a compiled workflow.
+capabilities:
+  provides: [execution.route]
+  requires: [workflow.plan, model.registry]
+  schemas:
+    workflow.plan: workflow-plan/v1
+    model.registry: model-registry/v1
+    execution.route: execution-route/v1
+inputs: {plan: {type: workflow-plan/v1, required: true}}
+outputs: {route: {type: execution-route/v1, required: true}}
+effects: {filesystem: none, network: none, external_side_effects: false}
+resources: {expected_tokens: 500, expected_seconds: 2, expected_cost: 0.0002}
+risk: {level: low}
+quality: {validators: [route_budget_valid], minimum_score: 0.88}
+certification: verified
+compatible_agents: [planner, loop-operator]
+languages: [python]
+task_types: [feature, bugfix, refactor]
+tags: [routing, cost]
+context_cost: 350
+historical_success: 0.91

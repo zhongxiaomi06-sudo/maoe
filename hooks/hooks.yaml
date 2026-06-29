@@ -1,0 +1,5 @@
+pre-run:
+  - name: load-core-files
+    action: bootstrap.load
+  - name: record-run-id
+    action: bootstrap.record

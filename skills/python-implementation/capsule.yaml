@@ -1,0 +1,30 @@
+id: python.implementation
+version: 1.0.0
+kind: workflow
+description: Implement a Python change from requirements and structural context.
+capabilities:
+  provides: [source.modified]
+  requires: [code.structure, requirement.spec, filesystem.write]
+  schemas:
+    code.structure: code-structure/python-v1
+    requirement.spec: requirement-spec/v1
+    source.modified: source-tree/python-v1
+inputs:
+  structure: {type: code-structure/python-v1, required: true}
+  requirements: {type: requirement-spec/v1, required: true}
+outputs: {changed_source: {type: source-tree/python-v1, required: true}}
+effects:
+  filesystem: write
+  network: none
+  external_side_effects: false
+  writes: [src/**]
+resources: {expected_tokens: 4500, expected_seconds: 45, expected_cost: 0.01}
+risk: {level: medium, rollback: git_restore_changed_source}
+quality: {validators: [source_parses, acceptance_criteria_met], minimum_score: 0.89}
+certification: verified
+compatible_agents: [code-agent]
+languages: [python]
+task_types: [feature, bugfix, refactor]
+tags: [python, implementation]
+context_cost: 1400
+historical_success: 0.91
